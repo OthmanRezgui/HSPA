@@ -1,1 +1,7 @@
-<p>property-list is up to date</p>
+  <div class="row">
+    <div *ngFor="let item of PropertyArray" class="shadow-lg col-sm-4 p-3">
+  <app-property-card [property]= "item" ></app-property-card>
+    </div>
+  </div>
+
+
