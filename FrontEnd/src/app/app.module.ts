@@ -27,6 +27,10 @@ import { PropertyDetailComponent } from './property/property-detail/property-det
   {
     path:"property-detail/:id",
     component: PropertyDetailComponent
+  },
+  {
+    path:"**",
+    component: PropertyListComponent
   }
 
 
