@@ -8,6 +8,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HousingService } from './services/housing.service';
 import { AddPropertyComponent } from './property/add-property/add-property.component';
  import { Routes, RouterModule } from '@angular/router';
+import { PropertyDetailComponent } from './property/property-detail/property-detail.component';
 
  const appRoutes: Routes =
  [
@@ -18,6 +19,14 @@ import { AddPropertyComponent } from './property/add-property/add-property.compo
   {
     path:"",
     component: PropertyListComponent
+  },
+  {
+    path:"rent-property",
+    component: PropertyListComponent
+  },
+  {
+    path:"property-detail/:id",
+    component: PropertyDetailComponent
   }
 
 
@@ -30,7 +39,8 @@ import { AddPropertyComponent } from './property/add-property/add-property.compo
     PropertyCardComponent,
     PropertyListComponent,
     NavBarComponent,
-    AddPropertyComponent
+    AddPropertyComponent,
+    PropertyDetailComponent
    ],
   imports: [
     BrowserModule,

@@ -1,33 +1,39 @@
  [
 
   {
+    "Id":1,
    "Type":"Home",
    "Price": 40000,
    "Name":"Clamart"
 
   },
   {
+    "Id":2,
     "Type":"Home",
     "Price": 23103,
     "Name":"Clamart"
 
    },
    {
+    "Id":3,
     "Type":"Appartement",
     "Price": 50000,
     "Name":"Clamart"
 
    },{
+    "Id":4,
     "Type":"Home",
     "Price": 40000,
     "Name":"Clamart"
 
    },{
+    "Id":5,
     "Type":"Appartement",
     "Price": 438927,
     "Name":"Clamart"
 
    },{
+    "Id":6,
     "Type":"Home",
     "Price": 123097,
     "Name":"Clamart"
