@@ -1,0 +1,37 @@
+ [
+
+  {
+   "Type":"Home",
+   "Price": 40000,
+   "Name":"Clamart"
+
+  },
+  {
+    "Type":"Home",
+    "Price": 23103,
+    "Name":"Clamart"
+
+   },
+   {
+    "Type":"Appartement",
+    "Price": 50000,
+    "Name":"Clamart"
+
+   },{
+    "Type":"Home",
+    "Price": 40000,
+    "Name":"Clamart"
+
+   },{
+    "Type":"Appartement",
+    "Price": 438927,
+    "Name":"Clamart"
+
+   },{
+    "Type":"Home",
+    "Price": 123097,
+    "Name":"Clamart"
+
+   }
+
+ ]
