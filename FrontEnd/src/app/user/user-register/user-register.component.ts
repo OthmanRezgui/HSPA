@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -11,7 +12,8 @@ export class UserRegisterComponent implements OnInit {
 
   registrationForm :FormGroup;
   constructor(private fb: FormBuilder, private userService: UserService) { }
-  user : any = {};
+  user : User ;
+  userSubmitted : boolean;
   ngOnInit() {
   this.createRegistrationForm();
   }
@@ -20,10 +22,27 @@ export class UserRegisterComponent implements OnInit {
     return fc.get('password')?.value === fc.get('confirmPassword')?.value ? null :
       { notmatched: true }
   };
+
+  userData() :User
+  {
+return this.user = {
+   userName: this.userName.value,
+   email:this.email.value,
+   password: this.password.value,
+   mobile :this.mobile.value
+};
+
+  }
   onSubmit()
   {
-   this.user = Object.assign(this.user, this.registrationForm.value);
+   this.userSubmitted = true;
+   this.user = this.userData();
+   if(this.registrationForm.valid)
+   {
    this.userService.addUser(this.user);
+   this.userSubmitted = false;
+   }
+   this.registrationForm.reset;
   }
 
   createRegistrationForm()
