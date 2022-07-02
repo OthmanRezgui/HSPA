@@ -8,5 +8,4 @@ Type:string;
 SellRent: number;
 Image?: string;
 
-
 }

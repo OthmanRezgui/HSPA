@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user-register',
@@ -9,16 +10,10 @@ import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn,
 export class UserRegisterComponent implements OnInit {
 
   registrationForm :FormGroup;
-  constructor() { }
-
+  constructor(private fb: FormBuilder, private userService: UserService) { }
+  user : any = {};
   ngOnInit() {
-    this.registrationForm = new FormGroup({
-    userName: new FormControl(null, Validators.required),
-    email: new FormControl(null,[Validators.required, Validators.email]),
-    password: new FormControl(null,[Validators.required,Validators.minLength(8)]),
-    confirmPassword: new FormControl(null,[Validators.required]),
-    mobile: new FormControl(null,[Validators.required, Validators.maxLength(10)])
-    },this.passwordMatchingValidator);
+  this.createRegistrationForm();
   }
 
   passwordMatchingValidator(fc: AbstractControl): ValidationErrors | null {
@@ -27,7 +22,19 @@ export class UserRegisterComponent implements OnInit {
   };
   onSubmit()
   {
-    console.log(this.registrationForm);
+   this.user = Object.assign(this.user, this.registrationForm.value);
+   this.userService.addUser(this.user);
+  }
+
+  createRegistrationForm()
+  {
+      this.registrationForm = this.fb.group({
+        userName: new FormControl(null, Validators.required),
+        email: new FormControl(null,[Validators.required, Validators.email]),
+        password: new FormControl(null,[Validators.required,Validators.minLength(8)]),
+        confirmPassword: new FormControl(null,[Validators.required]),
+        mobile: new FormControl(null,[Validators.required, Validators.maxLength(10)])
+      },{Validators: this.passwordMatchingValidator});
   }
 
   get userName()
@@ -46,5 +53,6 @@ export class UserRegisterComponent implements OnInit {
   get mobile() {
     return this.registrationForm.get('mobile') as FormControl;
   }
+
 
 }
