@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { IProperty } from '../iproperty';
@@ -28,12 +28,33 @@ export class AddPropertyComponent implements OnInit {
   RTM:null
 
   };
-  @ViewChild('Form') addPropertyForm : NgForm;
-  constructor(private router: Router) { }
+  //@ViewChild('Form') addPropertyForm : NgForm;
+  constructor(private router: Router, private fb:FormBuilder) { }
   @ViewChild('formTabs') formTabs : TabsetComponent;
+  addPropertyForm: FormGroup;
+  NextClicked : boolean;
+
+
   ngOnInit() {
+    this.CreateAddPropertyForm();
   }
 
+  CreateAddPropertyForm()
+  {
+    this.addPropertyForm = this.fb.group(
+       {
+        BasicInfo : this.fb.group({
+          SellRent : [null, Validators.required],
+          PType : [null, Validators.required],
+          Name : [null, Validators.required],
+        }),
+        PriceInfo: this.fb.group({
+          Price : [null, Validators.required],
+          BuiltArea : [null, Validators.required]
+        })
+      }
+    )
+  }
   onBack()
   {
     this.router.navigate(['/'])
@@ -41,13 +62,52 @@ export class AddPropertyComponent implements OnInit {
 
   onSubmit()
   {
+    this.NextClicked = true;
     console.log("Form is sending event");
-    console.log(this.addPropertyForm);
+    console.log(this.addPropertyForm.value.BasicInfo.SellRent);
+
+    if (this.BasicInfo.invalid)
+    {
+      this.formTabs.tabs[0].active = true
+      return;
+    }
+
+    if (this.PriceInfo.invalid)
+    {
+      this.formTabs.tabs[1].active = true
+      return;
+    }
   }
 
-  selectTab(tabId: number)
+  selectTab(tabId: number , IsCurrentTabValid : boolean )
   {
+    this.NextClicked = true ;
+    if (IsCurrentTabValid)
+    {
    this.formTabs.tabs[tabId].active = true;
+    }
+  }
+
+
+  get BasicInfo()
+  {
+    return this.addPropertyForm.controls.BasicInfo as FormGroup;
+  }
+
+  get SellRent()
+  {
+    return this.BasicInfo.controls.SellRent as FormControl;
+  }
+
+  get PriceInfo()
+  {
+    return this.addPropertyForm.controls.PriceInfo as FormGroup;
+  }
+
+
+  get Price()
+  {
+    return this.PriceInfo.controls.Price as FormControl;
   }
 
 }
