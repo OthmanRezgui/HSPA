@@ -10,7 +10,7 @@ import { IPropertyBase } from '../ipropertybase';
 })
 export class PropertyListComponent implements OnInit {
   PropertyArray: Array<IPropertyBase> =[];
-  SellRent = 1;
+  SellRent = 2;
 
   constructor(private housingService: HousingService, private route:ActivatedRoute) {}
 
@@ -22,6 +22,11 @@ export class PropertyListComponent implements OnInit {
     this.housingService.getAllProperties(this.SellRent).subscribe((data) => {
       console.log(data);
       this.PropertyArray = data;
+      const newProperty = JSON.parse(localStorage.getItem('newProp'));
+      if(newProperty.SellRent === this.SellRent)
+      {
+        this.PropertyArray = [newProperty, ...this.PropertyArray];
+      }
       console.log(this.route.snapshot.url.toString())
     },
     error=> console.log(error));
