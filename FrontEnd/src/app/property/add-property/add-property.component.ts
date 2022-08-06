@@ -200,9 +200,9 @@ export class AddPropertyComponent implements OnInit {
     if (this.allTabsValid()) {
       this.mapProperty();
       this.housingService.addProperty(this.property);
-      this.alertifyService.success('Congrats, your property listed successffully on our website');
+      this.alertifyService.success('Congrats, your property listed successfully on our website');
 
-      if (this.SellRent.value == 2)
+      if (this.SellRent.value === '2')
       {
         this.router.navigate(['/rent-property']);
       }
