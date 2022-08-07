@@ -1,3 +1,4 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HousingService } from 'src/app/services/housing.service';
@@ -11,6 +12,10 @@ import { IPropertyBase } from '../ipropertybase';
 export class PropertyListComponent implements OnInit {
   PropertyArray: Array<IPropertyBase> =[];
   SellRent = 1;
+  City='';
+  SearchCity ='';
+  SortybyParam='';
+  SortDirection ="asc";
 
   constructor(private housingService: HousingService, private route:ActivatedRoute) {}
 
@@ -30,5 +35,25 @@ export class PropertyListComponent implements OnInit {
       console.log(this.route.snapshot.url.toString())
     },
     error=> console.log(error));
+  }
+
+  onCityFilter()
+  {
+    this.SearchCity = this.City;
+  }
+  onCityClear()
+  {
+    this.SearchCity = '';
+  }
+
+  onSortDirection()
+  {
+    if(this.SortDirection ==='desc')
+    {
+    this.SortDirection = "asc";
+    }
+    else{
+      this.SortDirection ="desc";
+    }
   }
 }

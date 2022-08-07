@@ -22,6 +22,8 @@ import {ButtonsModule} from 'ngx-bootstrap/buttons';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker'
 import { PropertyDetailResolverService } from './property/property-detail/property-detail-resolver.service';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { FilterPipe } from './Pipes/filter.pipe';
+import { SortPipe } from './Pipes/sort.pipe';
  const appRoutes: Routes =
  [
   {
@@ -68,7 +70,9 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
     AddPropertyComponent,
     PropertyDetailComponent,
     UserLoginComponent,
-    UserRegisterComponent
+    UserRegisterComponent,
+    FilterPipe,
+    SortPipe
    ],
   imports: [
     BrowserModule,
