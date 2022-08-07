@@ -3,5 +3,7 @@
   min-height: 600px ;
 }
 
-.card_img
+.card img
 {padding: 10px;}
+
+.ngx-gallery { display: inline-block; margin-bottom: 20px; }
